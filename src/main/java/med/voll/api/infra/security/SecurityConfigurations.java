@@ -28,6 +28,8 @@ public class SecurityConfigurations {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
                 .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers("/swagger-ui.html", "/v3/api-docs/**","/swagger-ui/**").permitAll()
+
                 //.antMatchers(HttpMethod.DELETE, "/medicos").hasRole("ADMIN") nueva aplicacion
                 //.antMatchers(HttpMethod.DELETE, "/pacientes").hasRole("ADMIN")
                 .anyRequest()
