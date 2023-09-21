@@ -1,13 +1,14 @@
 package med.voll.api.controller;
 
-import med.voll.api.domain.paciente.DatosListadoPaciente;
-import med.voll.api.domain.paciente.DatosRegistroPaciente;
-import med.voll.api.domain.paciente.PacienteRepository;
+import jakarta.validation.Valid;
+import med.voll.api.domain.paciente.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @RequestMapping("/pacientes")
@@ -17,8 +18,11 @@ public class PacienteController {
     private PacienteRepository pacienteRepository;
 
     @PostMapping
-    public void registrar(@RequestBody DatosRegistroPaciente datosRegistroPaciente ){
+    public ResponseEntity registrar(@RequestBody @Valid DatosRegistroPaciente datosRegistroPaciente, UriComponentsBuilder uriBuilder ){
+        Paciente paciente = pacienteRepository.save(new Paciente(datosRegistroPaciente));
         System.out.println(datosRegistroPaciente);
+        var uri = uriBuilder.path("/pacientes/{id}").buildAndExpand(paciente.getId()).toUri();
+        return ResponseEntity.created(uri).body(new DatosDetallesPaciente(paciente));
     }
 
     @GetMapping

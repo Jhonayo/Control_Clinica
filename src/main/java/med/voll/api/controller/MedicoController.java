@@ -24,6 +24,7 @@ public class MedicoController {
     public ResponseEntity<DatosRespuestaMedico> registrarMedico(@RequestBody @Valid DatosRegistroMedico datosRegistroMedico,
                                                                 UriComponentsBuilder uriComponentsBuilder){
         Medico medico = medicoRepository.save(new Medico(datosRegistroMedico));
+        System.out.println(datosRegistroMedico);
         DatosRespuestaMedico datosRespuestaMedico = new DatosRespuestaMedico(medico.getId(),medico.getNombre(),medico.getEmail(),medico.getTelefono(),
                 medico.getEspecialidad().toString(),
                 new DatosDireccion(medico.getDireccion().getCalle(),medico.getDireccion().getDistrito(),

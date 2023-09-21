@@ -24,8 +24,10 @@ public class Paciente {
     private String telefono;
     @Embedded
     private Direccion direccion;
+    private Boolean activo;
 
     public Paciente(DatosRegistroPaciente datosRegistroPaciente){
+        this.activo=true;
         this.nombre=datosRegistroPaciente.nombre();
         this.email=datosRegistroPaciente.email();
         this.documento=datosRegistroPaciente.documento();

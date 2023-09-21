@@ -15,7 +15,7 @@ public record DatosRegistroPaciente(
         String telefono,
 
         @NotBlank
-        @Pattern(regexp = "\\d{3}\\.?\\d{3}\\.?\\d{3}\\-?\\d{2}")
+        @Pattern(regexp = "\\d{4,9}")
         String documento,
 
         @NotNull
